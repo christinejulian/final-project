@@ -3,107 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mini-Documentary: The Political Economy of Generative AI & Creative Labor</title>
+    <title>Ghost in the Machine: Value, AI, and Creative Labor</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
     <div class="documentary-container" id="docContainer">
         
-        <audio id="bgMusic" loop preload="auto">
-            <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=ambient-atmospheric-112191.mp3" type="audio/mpeg">
-        </audio>
+        <div class="visual-viewport">
+            <div class="ken-burns-wrapper" id="kenBurnsWrapper">
+                <img id="bgVisual" src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1920&auto=format&fit=crop" alt="Abstract AI Neural Network Art">
+            </div>
+            <div class="vignette-overlay"></div>
+            <div class="grid-overlay"></div>
+            <div class="scanline"></div>
+        </div>
 
-        <div class="viewport">
-            <div id="mediaLayer" class="media-layer">
-                <img id="activeImage" class="media-element active" src="" alt="Documentary Visual">
-                <video id="activeVideo" class="media-element" loop muted playsinline></video>
-                <div class="scanline-overlay"></div>
-                <div class="vignette-overlay"></div>
+        <div class="text-viewport">
+            <div class="chapter-badge" id="chapterBadge">CHAPTER 1 // INTRODUCTION</div>
+            
+            <div class="title-card-container" id="titleCard">
+                <h1 class="main-title" id="mainTitle">GHOST IN THE MACHINE</h1>
+                <h2 class="sub-title" id="subTitle">How Generative AI Produces, Consumes, and Redistributes Value</h2>
             </div>
 
-            <div class="text-overlay-layer">
-                <div class="chapter-badge" id="chapterBadge">CHAPTER 1 // INTRODUCTION</div>
-                <div class="main-title-card" id="titleCard">
-                    <h1 id="headlineText">THE EXOTICIZATION OF VALUE</h1>
-                    <p id="subtextText">Generative AI and the Restructuring of Creative Labor</p>
-                </div>
-                <div class="quote-card" id="quoteCard">
-                    <blockquote id="quoteText">"Raw human expression is extracted, transformed into weights, and sold back to the culture."</blockquote>
-                    <cite id="quoteSource">— Digital Political Economy Analysis</cite>
-                </div>
+            <div class="narrative-box" id="narrativeBox">
+                <p class="narrative-text" id="narrativeText">Click PLAY to begin the 5-minute visual mini-documentary.</p>
             </div>
 
-            <div class="subtitle-box" id="subtitleBox">
-                <p id="subtitleText">Press PLAY to initialize the documentary sequence...</p>
+            <div class="stat-callout" id="statCallout">
+                <span class="stat-number" id="statNumber">5.8B+</span>
+                <span class="stat-label" id="statLabel">Images scraped without artist consent in LAION-5B training datasets.</span>
             </div>
         </div>
 
-        <div class="controls-bar">
-            <button id="playBtn" class="ctrl-btn">PLAY</button>
-            <div class="time-display"><span id="currentTime">00:00</span> / <span id="totalTime">05:00</span></div>
-            <div class="progress-bar-container" id="progressContainer">
-                <div class="progress-bar" id="progressBar"></div>
-            </div>
-            <button id="muteBtn" class="ctrl-btn">MUSIC ON</button>
-            <button id="fullscreenBtn" class="ctrl-btn">FULLSCREEN</button>
+        <div class="audio-visualizer" id="visualizer">
+            <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+            <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
         </div>
+
+        <div class="controls-layer">
+            <div class="timeline-bar-container" id="timelineContainer">
+                <div class="timeline-progress" id="timelineProgress"></div>
+                <div class="chapter-marker" style="left: 0%;"></div>
+                <div class="chapter-marker" style="left: 20%;"></div>
+                <div class="chapter-marker" style="left: 40%;"></div>
+                <div class="chapter-marker" style="left: 60%;"></div>
+                <div class="chapter-marker" style="left: 80%;"></div>
+            </div>
+
+            <div class="control-buttons">
+                <button id="playBtn" class="btn">PLAY</button>
+                <button id="restartBtn" class="btn secondary">RESTART</button>
+                <div class="time-display">
+                    <span id="currentTime">00:00</span> / <span id="totalTime">05:00</span>
+                </div>
+            </div>
+
+            <div class="chapter-nav">
+                <button class="chap-btn" data-time="0">Ch 1: Extraction</button>
+                <button class="chap-btn" data-time="60">Ch 2: Scraping</button>
+                <button class="chap-btn" data-time="120">Ch 3: Disruption</button>
+                <button class="chap-btn" data-time="180">Ch 4: Ghost Labor</button>
+                <button class="chap-btn" data-time="240">Ch 5: Synthesis</button>
+            </div>
+        </div>
+
     </div>
 
-    <section class="script-documentation">
-        <h2>Mini-Documentary Production Script & Visual Storyboard</h2>
-        <p class="script-intro"><strong>Thesis:</strong> Generative AI models (e.g., ChatGPT, Gemini, Sora) do not generate value out of thin air; they expropriate centuries of collective human artistic output, automate creative tasks, devalue human work, and rely on hidden, underpaid labor in the Global South to sanitize and calibrate their systems.</p>
-
-        <table class="script-table">
-            <thead>
-                <tr>
-                    <th>Timestamp</th>
-                    <th>Chapter & Focus</th>
-                    <th>Visual Media & Source Asset</th>
-                    <th>On-Screen Text & Narrative Focus</th>
-                    <th>Audio Atmosphere</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>00:00 - 00:45</td>
-                    <td>Act I: The Extraction Engine</td>
-                    <td>High-speed montage of digital art, code repositories, digital painting, server stacks.<br><em>Source: Unsplash/Pexels Abstract Data & Server visuals</em></td>
-                    <td>"How does your digital life produce value? Every click, post, and stroke of art becomes the raw material for algorithmic capital."</td>
-                    <td>Low atmospheric synth pad, rhythmic electronic pulse.</td>
-                </tr>
-                <tr>
-                    <td>00:45 - 01:30</td>
-                    <td>Act II: Data Enclosure & Uncompensated Labor</td>
-                    <td>Comparison split-screen: Traditional illustrator drawing vs. Diffusion model generating 1,000 images per minute. Logos of OpenAI, Google, Midjourney.</td>
-                    <td>"Large Multimodal Models require petabytes of human creativity. Used without consent, compensation, or attribution."</td>
-                    <td>Subtle tension bass line, ticking metallic percussion.</td>
-                </tr>
-                <tr>
-                    <td>01:30 - 02:30</td>
-                    <td>Act III: Automation, De-skilling, and Disparagement</td>
-                    <td>Dynamic kinetic text showing affected creative industries: Writing, Graphic Design, Voice Acting, Film Editing, Music Composition.</td>
-                    <td>"Automation does not merely assist; it de-skills and cheapens expert craft, turning creative directors into prompt engineers."</td>
-                    <td>Dissonant ambient strings, swelling drone.</td>
-                </tr>
-                <tr>
-                    <td>02:30 - 03:45</td>
-                    <td>Act IV: The Shadow Proletariat of the Global South</td>
-                    <td>Map highlights of Nairobi (Kenya), Manila (Philippines), Caracas (Venezuela). Images of data annotation offices and content moderation queues.</td>
-                    <td>"Behind clean AI interfaces lies the hidden labor force: low-wage workers annotating toxicity, filtering horror, and training RLHF models for $1.50/hour."</td>
-                    <td>Somber, slow minimalist piano with ambient hum.</td>
-                </tr>
-                <tr>
-                    <td>03:45 - 05:00</td>
-                    <td>Act V: Reclaiming Creative Agency & Structural Shift</td>
-                    <td>Protest graphics against scraping, artist union logos, open-source cooperatives, emerging ethical AI frameworks.</td>
-                    <td>"AI does not democratize art by default—it consolidates power unless labor reclaims ownership of the infrastructure."</td>
-                    <td>Resolving harmonic chord progression, uplifting electronic build to crescendo.</td>
-                </tr>
-            </tbody>
-        </table>
-    </section>
+    <audio id="bgAudio" loop crossorigin="anonymous">
+        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=ambient-atmospheric-112704.mp3" type="audio/mpeg">
+    </audio>
 
     <script src="main.js"></script>
 </body>
