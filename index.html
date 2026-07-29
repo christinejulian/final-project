@@ -1,68 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Mini-Documentary: The Political Economy of Generative AI</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mini-Doc: The Political Economy of Generative AI & Creative Labor</title>
+  <link rel="stylesheet" href="style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Inter:wght@300;400;600;700&family=Space+Mono&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
+  <audio id="bg-music" loop src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=ambient-cinematic-documentary-115348.mp3"></audio>
+
   <div class="documentary-container">
     
-    <header class="doc-header">
-      <div class="badge">MIDTERM DIGITAL MEDIA INVESTIGATION</div>
-      <h1>Ghost in the Machine: Value & Labor in the AI Economy</h1>
-      <p class="subtitle">Examining how Generative AI reshapes power, ownership, and value extraction.</p>
-    </header>
-
-    <main class="player-stage">
+    <div class="media-layer">
+      <div class="scene-media active" data-scene="1">
+        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1920&q=80" alt="Abstract Data Streams">
+      </div>
+      <div class="scene-media" data-scene="2">
+        <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=1920&q=80" alt="Art Gallery and Human Painting">
+      </div>
+      <div class="scene-media" data-scene="3">
+        <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1920&q=80" alt="Digital Code and Automation">
+      </div>
+      <div class="scene-media" data-scene="4">
+        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1920&q=80" alt="Worker at Computer Terminal">
+      </div>
+      <div class="scene-media" data-scene="5">
+        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1920&q=80" alt="Global Network Connection">
+      </div>
       
-      <div class="screen-wrapper" id="screenWrapper">
-        <div class="visual-layer" id="visualLayer">
-          <div class="media-bg" id="mediaBg"></div>
-          <div class="scanline-overlay"></div>
+      <div class="cinematic-overlay"></div>
+    </div>
+
+    <div class="content-layer">
+      <header class="doc-header">
+        <span class="badge">MIDTERM DOCUMENTARY EXAM</span>
+        <span class="timer" id="time-display">00:00 / 05:00</span>
+      </header>
+
+      <main class="text-display">
+        <section class="scene-text active" data-scene="1">
+          <h3 class="chapter-tag">PART I — INTRO</h3>
+          <h1 class="title">The Extraction of Value in the AI Economy</h1>
+          <p class="narration">
+            How does your digital life produce, consume, and redistribute value—and for whom? Every click, post, and creative upload forms an unpaid labor foundation for generative models.
+          </p>
+        </section>
+
+        <section class="scene-text" data-scene="2">
+          <h3 class="chapter-tag">PART II — DATASET EXPLOITATION</h3>
+          <h2 class="heading">Raw Material Without Consent</h2>
+          <p class="narration">
+            Generative systems—from ChatGPT to Sora and Gemini—rely on vast scraped datasets of human art, writing, and design. Human expression is transformed into corporate training data without attribution, compensation, or clear legal consent.
+          </p>
+        </section>
+
+        <section class="scene-text" data-scene="3">
+          <h3 class="chapter-tag">PART III — AUTOMATION & DEVALUATION</h3>
+          <h2 class="heading">Devaluing Traditional Craft</h2>
+          <p class="narration">
+            By automating tasks in visual design, copywriting, musical composition, and video editing, capital shifts away from traditional craft. Human labor is compressed while platform monopolies capture the surplus value.
+          </p>
+        </section>
+
+        <section class="scene-text" data-scene="4">
+          <h3 class="chapter-tag">PART IV — GLOBAL INEQUALITIES</h3>
+          <h2 class="heading">The Shadow Labor Force</h2>
+          <p class="narration">
+            Behind the clean interface of AI lies hidden human labor. Thousands of workers in the Global South perform content moderation, data labeling, and annotation under low wages and high psychological strain.
+          </p>
+        </section>
+
+        <section class="scene-text" data-scene="5">
+          <h3 class="chapter-tag">PART V — CONCLUSION</h3>
+          <h2 class="heading">Restructuring Cultural Production</h2>
+          <p class="narration">
+            AI is not merely a technological shift; it is a fundamental restructuring of creative economy. Does it democratize creation, or entrench tech monopolies? The future of human artistic labor hangs in the balance.
+          </p>
+        </section>
+      </main>
+
+      <footer class="doc-controls">
+        <div class="progress-bar-container">
+          <div class="progress-bar" id="progress-bar"></div>
         </div>
-
-        <div class="overlay-layer">
-          <div class="lower-third" id="lowerThird">
-            <span class="category-tag" id="chapterTag">Introduction</span>
-            <h2 class="slide-title" id="slideTitle">Digital Life & Value Redistribution</h2>
-          </div>
-          <div class="subtitle-box">
-            <p id="narrationText">Loading documentary narration...</p>
-          </div>
+        <div class="buttons-group">
+          <button id="btn-prev" class="btn">❮ Prev</button>
+          <button id="btn-play" class="btn btn-primary">▶ Play Documentary</button>
+          <button id="btn-next" class="btn">Next ❯</button>
+          <button id="btn-mute" class="btn">🔊 Music</button>
         </div>
-      </div>
-
-      <div class="controls-bar">
-        <button id="playPauseBtn" class="control-btn" aria-label="Play or Pause">
-          <span id="playIcon">▶ Play Documentary</span>
-        </button>
-
-        <div class="progress-wrapper">
-          <div class="progress-bar-container" id="progressBarContainer">
-            <div class="progress-bar" id="progressBar"></div>
-          </div>
-          <div class="time-display">
-            <span id="currentTime">00:00</span> / <span id="totalTime">05:00</span>
-          </div>
-        </div>
-
-        <button id="narrationToggle" class="control-btn secondary">
-          🔊 Voice: <span id="voiceStatus">ON</span>
-        </button>
-      </div>
-    </main>
-
-    <section class="chapter-navigation">
-      <h3>Documentary Breakdown & Key Themes</h3>
-      <div class="chapter-grid" id="chapterGrid">
-        </div>
-    </section>
+      </footer>
+    </div>
 
   </div>
 
