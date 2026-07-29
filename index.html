@@ -1,69 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ghost in the Machine: Generative AI & The Restructuring of Creative Labor</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini-Documentary: The Political Economy of Generative AI & Creative Labor</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Inter:wght@300;400;600;800&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-  <div id="app-container">
-    <header class="doc-header">
-      <div class="logo">MIDTERM DIGITAL MEDIA ANALYSIS</div>
-      <div class="doc-title-badge">MINI-DOCUMENTARY | 05:00</div>
-    </header>
+    <div class="documentary-container">
+        <div class="scanlines"></div>
+        <div class="vignette"></div>
 
-    <main class="stage">
-      
-      <div class="visual-wrapper">
-        <div id="visual-layer" class="visual-layer"></div>
-        <div class="vignette-overlay"></div>
-        <div class="scanline-overlay"></div>
-      </div>
+        <div class="media-viewport">
+            <div class="media-frame active" id="scene-1">
+                <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=1920&q=80" class="visual-media zoom-in" alt="Digital artist working on tablet">
+                <div class="credit-tag">Visual: Digital Creative Studio / Human Labor</div>
+            </div>
 
-      <div class="overlay-layer">
-        <div id="chapter-indicator" class="chapter-indicator">ACT I // THE EXTRACTION ECONOMY</div>
-        <div id="on-screen-graphic" class="on-screen-graphic"></div>
-      </div>
+            <div class="media-frame" id="scene-2">
+                <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1920&q=80" class="visual-media pan-left" alt="Matrix of code and data scraping nodes">
+                <div class="credit-tag">Visual: Data Scraping & Web Crawling Extraction</div>
+            </div>
 
-      <div class="caption-container">
-        <p id="caption-text">Click "Start Documentary" to initiate playback and narration.</p>
-      </div>
+            <div class="media-frame" id="scene-3">
+                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1920&q=80" class="visual-media zoom-out" alt="Abstract AI visual synthesis node">
+                <div class="credit-tag">Visual: Corporate Generative AI Model Training</div>
+            </div>
 
-      <div id="start-screen" class="start-screen">
-        <h1 class="main-title">GHOST IN THE MACHINE</h1>
-        <h2 class="sub-title">How Generative AI Produces, Consumes, and Redistributes Value in Digital Media</h2>
-        <p class="author-tag">Midterm Video Essay & Interactive Media Project</p>
-        <button id="start-btn" class="primary-btn">START DOCUMENTARY</button>
-      </div>
-    </main>
+            <div class="media-frame" id="scene-4">
+                <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1920&q=80" class="visual-media pan-right" alt="Server rack infrastructure tech platform">
+                <div class="credit-tag">Visual: Hyperscale Platform Infrastructure</div>
+            </div>
 
-    <footer class="control-dock">
-      <div class="progress-bar-container" id="progress-container">
-        <div id="progress-bar" class="progress-bar"></div>
-      </div>
+            <div class="media-frame" id="scene-5">
+                <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1920&q=80" class="visual-media zoom-in" alt="Computer screen displaying automated creative prompt software">
+                <div class="credit-tag">Visual: Automated Layout and Vector Generation</div>
+            </div>
 
-      <div class="dock-controls">
-        <button id="play-pause-btn" class="dock-btn" disabled>Pause</button>
-        <div class="time-display">
-          <span id="current-time">00:00</span> / <span id="total-time">05:00</span>
+            <div class="media-frame" id="scene-6">
+                <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=1920&q=80" class="visual-media pan-left" alt="Empty sound studio soundboard representing displacement">
+                <div class="credit-tag">Visual: Automated Music & Audio Synthesis Displacement</div>
+            </div>
+
+            <div class="media-frame" id="scene-7">
+                <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1920&q=80" class="visual-media zoom-out" alt="Worker in global south content moderation office">
+                <div class="credit-tag">Visual: Outsourced Data Labeling & Moderation Hub</div>
+            </div>
+
+            <div class="media-frame" id="scene-8">
+                <img src="https://images.unsplash.com/photo-1589561253898-768105ca91a8?auto=format&fit=crop&w=1920&q=80" class="visual-media pan-right" alt="Global network connection lines highlighting north-south inequality">
+                <div class="credit-tag">Visual: Geopolitical Division of Algorithmic Labor</div>
+            </div>
+
+            <div class="media-frame" id="scene-9">
+                <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1920&q=80" class="visual-media zoom-in" alt="Global digital media economy network sphere">
+                <div class="credit-tag">Visual: The Restructured Digital Media Economy</div>
+            </div>
         </div>
-        <div class="scene-nav">
-          <button id="prev-scene-btn" class="dock-btn-sm" disabled>&laquo; Prev Act</button>
-          <span id="act-label">Act 1 of 4</span>
-          <button id="next-scene-btn" class="dock-btn-sm" disabled>Next Act &raquo;</button>
-        </div>
-        <div class="audio-controls">
-          <button id="toggle-audio-btn" class="dock-btn-sm">Mute Audio</button>
-        </div>
-      </div>
-    </footer>
-  </div>
 
-  <script src="main.js"></script>
+        <div class="text-stage">
+            <div class="chapter-indicator" id="chapter-title">ACT I: THE EXTRACTION ENGINE</div>
+            <div class="narrative-card" id="narrative-text">
+                </div>
+        </div>
+
+        <div class="hud-layer">
+            <div class="hud-top">
+                <div class="title-badge"><span class="rec-dot"></span> MINI-DOC // THE VALUE PIPELINE</div>
+                <div class="timer-display" id="time-code">00:00 / 05:00</div>
+            </div>
+            <div class="hud-bottom">
+                <div class="progress-bar-container">
+                    <div class="progress-bar" id="progress-bar"></div>
+                </div>
+                <div class="controls-group">
+                    <button id="play-btn" class="ctrl-btn">PLAY</button>
+                    <button id="restart-btn" class="ctrl-btn">RESTART</button>
+                    <div class="audio-status" id="audio-status">AUDIO: SYNTHWAVE / AMBIENT CONTINUUM</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
 </body>
 </html>
