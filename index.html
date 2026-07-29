@@ -1,75 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mini-Documentary: The Political Economy of Generative AI & Creative Labor</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ghost in the Machine: Generative AI & The Restructuring of Creative Labor</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="documentary-container">
-        <header class="doc-header">
-            <div class="brand">
-                <span class="rec-dot"></span>
-                <span class="title-text">CRITICAL MEDIA STUDIES // MIDTERM DOCUMENTARY</span>
-            </div>
-            <div class="meta-info">
-                <span id="chapter-indicator">ACT I: DATA EXTRACTION & VALUE CAPTURE</span>
-                <span id="timer-display">00:00 / 05:00</span>
-            </div>
-        </header>
 
-        <main class="viewport">
-            <div class="media-layer" id="media-layer">
-                <div class="overlay-gradient"></div>
-                <div class="grid-overlay"></div>
-                <div class="visual-stage" id="visual-stage">
-                    </div>
-            </div>
+  <div id="app-container">
+    <header class="doc-header">
+      <div class="logo">MIDTERM DIGITAL MEDIA ANALYSIS</div>
+      <div class="doc-title-badge">MINI-DOCUMENTARY | 05:00</div>
+    </header>
 
-            <div class="narrative-overlay">
-                <div class="badge" id="act-badge">CHAPTER 01</div>
-                <h1 id="slide-headline">Extracting the Creative Commons</h1>
-                <p id="slide-subtext">How generative AI models turn human artistic output into raw capital without consent, compensation, or attribution.</p>
-                
-                <div class="data-card" id="data-card">
-                    <div class="data-title" id="data-title">DATA MINING SCALE</div>
-                    <div class="data-value" id="data-value">5.85 Billion Pairings</div>
-                    <div class="data-desc" id="data-desc">LAION-5B dataset scraped public artistic portfolios across ArtStation, DeviantArt, and Pinterest to train latent diffusion models.</div>
-                </div>
-            </div>
+    <main class="stage">
+      
+      <div class="visual-wrapper">
+        <div id="visual-layer" class="visual-layer"></div>
+        <div class="vignette-overlay"></div>
+        <div class="scanline-overlay"></div>
+      </div>
 
-            <div class="subtitles-box">
-                <div class="narrator-label">NARRATOR</div>
-                <div id="subtitle-text">Welcome to this investigation into how your digital life produces, consumes, and redistributes value within the digital media economy...</div>
-            </div>
-        </main>
+      <div class="overlay-layer">
+        <div id="chapter-indicator" class="chapter-indicator">ACT I // THE EXTRACTION ECONOMY</div>
+        <div id="on-screen-graphic" class="on-screen-graphic"></div>
+      </div>
 
-        <footer class="doc-footer">
-            <div class="progress-container" id="progress-container">
-                <div class="progress-bar" id="progress-bar"></div>
-            </div>
-            
-            <div class="control-panel">
-                <div class="left-controls">
-                    <button id="prev-btn" class="ctrl-btn" title="Previous Act">⏮</button>
-                    <button id="play-btn" class="ctrl-btn main-play" title="Play/Pause">▶</button>
-                    <button id="next-btn" class="ctrl-btn" title="Next Act">⏭</button>
-                    <button id="audio-toggle" class="ctrl-btn" title="Toggle Synthesized Ambient Music">🎵 Music: ON</button>
-                    <button id="voice-toggle" class="ctrl-btn" title="Toggle Voiceover Narrator">🎙️ Narration: ON</button>
-                </div>
+      <div class="caption-container">
+        <p id="caption-text">Click "Start Documentary" to initiate playback and narration.</p>
+      </div>
 
-                <div class="act-selector">
-                    <button class="act-btn active" data-act="0">Act I: Value Capture</button>
-                    <button class="act-btn" data-act="1">Act II: De-skilling</button>
-                    <button class="act-btn" data-act="2">Act III: Ghost Work</button>
-                    <button class="act-btn" data-act="3">Act IV: Restructuring</button>
-                </div>
-            </div>
-        </footer>
-    </div>
+      <div id="start-screen" class="start-screen">
+        <h1 class="main-title">GHOST IN THE MACHINE</h1>
+        <h2 class="sub-title">How Generative AI Produces, Consumes, and Redistributes Value in Digital Media</h2>
+        <p class="author-tag">Midterm Video Essay & Interactive Media Project</p>
+        <button id="start-btn" class="primary-btn">START DOCUMENTARY</button>
+      </div>
+    </main>
 
-    <script src="main.js"></script>
+    <footer class="control-dock">
+      <div class="progress-bar-container" id="progress-container">
+        <div id="progress-bar" class="progress-bar"></div>
+      </div>
+
+      <div class="dock-controls">
+        <button id="play-pause-btn" class="dock-btn" disabled>Pause</button>
+        <div class="time-display">
+          <span id="current-time">00:00</span> / <span id="total-time">05:00</span>
+        </div>
+        <div class="scene-nav">
+          <button id="prev-scene-btn" class="dock-btn-sm" disabled>&laquo; Prev Act</button>
+          <span id="act-label">Act 1 of 4</span>
+          <button id="next-scene-btn" class="dock-btn-sm" disabled>Next Act &raquo;</button>
+        </div>
+        <div class="audio-controls">
+          <button id="toggle-audio-btn" class="dock-btn-sm">Mute Audio</button>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script src="main.js"></script>
 </body>
 </html>
