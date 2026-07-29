@@ -5,84 +5,105 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mini-Documentary: The Political Economy of Generative AI & Creative Labor</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Inter:wght@300;400;600;800&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <div class="documentary-container">
-        <div class="scanlines"></div>
-        <div class="vignette"></div>
+    <div class="documentary-container" id="docContainer">
+        
+        <audio id="bgMusic" loop preload="auto">
+            <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=ambient-atmospheric-112191.mp3" type="audio/mpeg">
+        </audio>
 
-        <div class="media-viewport">
-            <div class="media-frame active" id="scene-1">
-                <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=1920&q=80" class="visual-media zoom-in" alt="Digital artist working on tablet">
-                <div class="credit-tag">Visual: Digital Creative Studio / Human Labor</div>
+        <div class="viewport">
+            <div id="mediaLayer" class="media-layer">
+                <img id="activeImage" class="media-element active" src="" alt="Documentary Visual">
+                <video id="activeVideo" class="media-element" loop muted playsinline></video>
+                <div class="scanline-overlay"></div>
+                <div class="vignette-overlay"></div>
             </div>
 
-            <div class="media-frame" id="scene-2">
-                <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1920&q=80" class="visual-media pan-left" alt="Matrix of code and data scraping nodes">
-                <div class="credit-tag">Visual: Data Scraping & Web Crawling Extraction</div>
+            <div class="text-overlay-layer">
+                <div class="chapter-badge" id="chapterBadge">CHAPTER 1 // INTRODUCTION</div>
+                <div class="main-title-card" id="titleCard">
+                    <h1 id="headlineText">THE EXOTICIZATION OF VALUE</h1>
+                    <p id="subtextText">Generative AI and the Restructuring of Creative Labor</p>
+                </div>
+                <div class="quote-card" id="quoteCard">
+                    <blockquote id="quoteText">"Raw human expression is extracted, transformed into weights, and sold back to the culture."</blockquote>
+                    <cite id="quoteSource">— Digital Political Economy Analysis</cite>
+                </div>
             </div>
 
-            <div class="media-frame" id="scene-3">
-                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1920&q=80" class="visual-media zoom-out" alt="Abstract AI visual synthesis node">
-                <div class="credit-tag">Visual: Corporate Generative AI Model Training</div>
-            </div>
-
-            <div class="media-frame" id="scene-4">
-                <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1920&q=80" class="visual-media pan-right" alt="Server rack infrastructure tech platform">
-                <div class="credit-tag">Visual: Hyperscale Platform Infrastructure</div>
-            </div>
-
-            <div class="media-frame" id="scene-5">
-                <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1920&q=80" class="visual-media zoom-in" alt="Computer screen displaying automated creative prompt software">
-                <div class="credit-tag">Visual: Automated Layout and Vector Generation</div>
-            </div>
-
-            <div class="media-frame" id="scene-6">
-                <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=1920&q=80" class="visual-media pan-left" alt="Empty sound studio soundboard representing displacement">
-                <div class="credit-tag">Visual: Automated Music & Audio Synthesis Displacement</div>
-            </div>
-
-            <div class="media-frame" id="scene-7">
-                <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1920&q=80" class="visual-media zoom-out" alt="Worker in global south content moderation office">
-                <div class="credit-tag">Visual: Outsourced Data Labeling & Moderation Hub</div>
-            </div>
-
-            <div class="media-frame" id="scene-8">
-                <img src="https://images.unsplash.com/photo-1589561253898-768105ca91a8?auto=format&fit=crop&w=1920&q=80" class="visual-media pan-right" alt="Global network connection lines highlighting north-south inequality">
-                <div class="credit-tag">Visual: Geopolitical Division of Algorithmic Labor</div>
-            </div>
-
-            <div class="media-frame" id="scene-9">
-                <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1920&q=80" class="visual-media zoom-in" alt="Global digital media economy network sphere">
-                <div class="credit-tag">Visual: The Restructured Digital Media Economy</div>
+            <div class="subtitle-box" id="subtitleBox">
+                <p id="subtitleText">Press PLAY to initialize the documentary sequence...</p>
             </div>
         </div>
 
-        <div class="text-stage">
-            <div class="chapter-indicator" id="chapter-title">ACT I: THE EXTRACTION ENGINE</div>
-            <div class="narrative-card" id="narrative-text">
-                </div>
-        </div>
-
-        <div class="hud-layer">
-            <div class="hud-top">
-                <div class="title-badge"><span class="rec-dot"></span> MINI-DOC // THE VALUE PIPELINE</div>
-                <div class="timer-display" id="time-code">00:00 / 05:00</div>
+        <div class="controls-bar">
+            <button id="playBtn" class="ctrl-btn">PLAY</button>
+            <div class="time-display"><span id="currentTime">00:00</span> / <span id="totalTime">05:00</span></div>
+            <div class="progress-bar-container" id="progressContainer">
+                <div class="progress-bar" id="progressBar"></div>
             </div>
-            <div class="hud-bottom">
-                <div class="progress-bar-container">
-                    <div class="progress-bar" id="progress-bar"></div>
-                </div>
-                <div class="controls-group">
-                    <button id="play-btn" class="ctrl-btn">PLAY</button>
-                    <button id="restart-btn" class="ctrl-btn">RESTART</button>
-                    <div class="audio-status" id="audio-status">AUDIO: SYNTHWAVE / AMBIENT CONTINUUM</div>
-                </div>
-            </div>
+            <button id="muteBtn" class="ctrl-btn">MUSIC ON</button>
+            <button id="fullscreenBtn" class="ctrl-btn">FULLSCREEN</button>
         </div>
     </div>
+
+    <section class="script-documentation">
+        <h2>Mini-Documentary Production Script & Visual Storyboard</h2>
+        <p class="script-intro"><strong>Thesis:</strong> Generative AI models (e.g., ChatGPT, Gemini, Sora) do not generate value out of thin air; they expropriate centuries of collective human artistic output, automate creative tasks, devalue human work, and rely on hidden, underpaid labor in the Global South to sanitize and calibrate their systems.</p>
+
+        <table class="script-table">
+            <thead>
+                <tr>
+                    <th>Timestamp</th>
+                    <th>Chapter & Focus</th>
+                    <th>Visual Media & Source Asset</th>
+                    <th>On-Screen Text & Narrative Focus</th>
+                    <th>Audio Atmosphere</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>00:00 - 00:45</td>
+                    <td>Act I: The Extraction Engine</td>
+                    <td>High-speed montage of digital art, code repositories, digital painting, server stacks.<br><em>Source: Unsplash/Pexels Abstract Data & Server visuals</em></td>
+                    <td>"How does your digital life produce value? Every click, post, and stroke of art becomes the raw material for algorithmic capital."</td>
+                    <td>Low atmospheric synth pad, rhythmic electronic pulse.</td>
+                </tr>
+                <tr>
+                    <td>00:45 - 01:30</td>
+                    <td>Act II: Data Enclosure & Uncompensated Labor</td>
+                    <td>Comparison split-screen: Traditional illustrator drawing vs. Diffusion model generating 1,000 images per minute. Logos of OpenAI, Google, Midjourney.</td>
+                    <td>"Large Multimodal Models require petabytes of human creativity. Used without consent, compensation, or attribution."</td>
+                    <td>Subtle tension bass line, ticking metallic percussion.</td>
+                </tr>
+                <tr>
+                    <td>01:30 - 02:30</td>
+                    <td>Act III: Automation, De-skilling, and Disparagement</td>
+                    <td>Dynamic kinetic text showing affected creative industries: Writing, Graphic Design, Voice Acting, Film Editing, Music Composition.</td>
+                    <td>"Automation does not merely assist; it de-skills and cheapens expert craft, turning creative directors into prompt engineers."</td>
+                    <td>Dissonant ambient strings, swelling drone.</td>
+                </tr>
+                <tr>
+                    <td>02:30 - 03:45</td>
+                    <td>Act IV: The Shadow Proletariat of the Global South</td>
+                    <td>Map highlights of Nairobi (Kenya), Manila (Philippines), Caracas (Venezuela). Images of data annotation offices and content moderation queues.</td>
+                    <td>"Behind clean AI interfaces lies the hidden labor force: low-wage workers annotating toxicity, filtering horror, and training RLHF models for $1.50/hour."</td>
+                    <td>Somber, slow minimalist piano with ambient hum.</td>
+                </tr>
+                <tr>
+                    <td>03:45 - 05:00</td>
+                    <td>Act V: Reclaiming Creative Agency & Structural Shift</td>
+                    <td>Protest graphics against scraping, artist union logos, open-source cooperatives, emerging ethical AI frameworks.</td>
+                    <td>"AI does not democratize art by default—it consolidates power unless labor reclaims ownership of the infrastructure."</td>
+                    <td>Resolving harmonic chord progression, uplifting electronic build to crescendo.</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
 
     <script src="main.js"></script>
 </body>
