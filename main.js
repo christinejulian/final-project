@@ -1,261 +1,205 @@
-/* ==========================================================================
-   MINI-DOCUMENTARY SCRIPT & CONTROLLER ENGINE (main.js)
-   ========================================================================== */
-
-document.addEventListener("DOMContentLoaded", () => {
-    
-    // Documentary Script Data Matrix (Exact 5-minute sync broken into timed frames)
-    const scriptMatrix = [
+// main.js
+document.addEventListener('DOMContentLoaded', () => {
+    // Media Asset Pipeline (Curated stock visuals representing the political economy of AI)
+    const mediaSequence = [
         {
             timeStart: 0,
-            duration: 18,
-            chapter: "PROLOGUE: THE DIGITAL VALUE ENGINE",
-            title: "How Digital Life Produces Value",
-            body: "Every click, keystroke, and uploaded creation feeds an invisible economic engine. In modern media economies, <span class='highlight-cyan'>your digital life is constant productive labor</span>—producing raw data, consuming algorithmic feeds, and generating market value.",
-            mediaId: "scene-1"
+            timeEnd: 45,
+            chapter: "CHAPTER I // THE EXTRACTION ENGINE",
+            type: "image",
+            url: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1200&q=80",
+            title: "WHO PRODUCES THE VALUE?",
+            subtitle: "Generative AI and the Exploitation of Creative Work",
+            quote: null,
+            subtitles: "In every second of our connected digital lives, we produce vast oceans of images, prose, code, and audio. But under platform capitalism, this human expression is treated as raw, unowned material ripe for corporate enclosure."
         },
         {
-            timeStart: 18,
-            duration: 22,
-            chapter: "PROLOGUE: RE-DISTRIBUTION OF CAPITAL",
-            title: "Value Dislocation in Networked Capitalism",
-            body: "While creative human output powers digital media networks, the value generated is systematically extracted. Capital flows away from frontline creators and consolidates directly within <span class='highlight-gold'>centralized platform monopolies</span>.",
-            mediaId: "scene-1"
-        },
-        {
-            timeStart: 40,
-            duration: 25,
-            chapter: "ACT I: RAW MATERIAL EXTRACTION",
-            title: "Artists Output as Uncompensated Training Data",
-            body: "Generative AI systems (ChatGPT, Gemini, Sora) rely on vast repositories of human art, text, music, and video scraped from the open web—turning decades of professional human artistic output into <span class='highlight-red'>free raw material</span> without explicit consent, transparency, or compensation.",
-            mediaId: "scene-2"
-        },
-        {
-            timeStart: 65,
-            duration: 25,
-            chapter: "ACT I: CORPORATE ENCLOSURE",
-            title: "Shifting Value to Platform Owners",
-            body: "This extraction dynamic represents a historic enclosure of the creative commons. Tech conglomerates monetize trained foundation models, transforming human creative heritage into proprietary SaaS subscription products.",
-            mediaId: "scene-3"
+            timeStart: 45,
+            timeEnd: 90,
+            chapter: "CHAPTER II // DATA ENCLOSURE & UNCOMPENSATED CRAFT",
+            type: "image",
+            url: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80",
+            title: "THE ENCLOSURE OF COMMONS",
+            subtitle: "Unpaid Training Material for Multimodal Models",
+            quote: {
+                text: "LMMs like ChatGPT, Gemini, and Sora require petabytes of human creativity—harvested without explicit consent, compensation, or clear attribution.",
+                source: "Digital Media Political Economy"
+            },
+            subtitles: "Companies like OpenAI, Google, and Midjourney convert the cumulative heritage of human culture into private algorithmic weights. Creators become non-consensual suppliers to systems built to replace them."
         },
         {
             timeStart: 90,
-            duration: 25,
-            chapter: "ACT II: DISRUPTION OF CREATIVE LABOR",
-            title: "Automating Artisanal Skills",
-            body: "AI models now automate complex tasks across writing, graphic design, illustration, music production, and video editing. Traditional skills honed over lifetimes are suddenly re-framed as redundant bottlenecks in automated media assembly lines.",
-            mediaId: "scene-5"
+            timeEnd: 150,
+            chapter: "CHAPTER III // AUTOMATION & DESKILLING",
+            type: "image",
+            url: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=1200&q=80",
+            title: "DISPARAGING REAL CRAFT",
+            subtitle: "Devaluation of Graphic Design, Writing, and Illustration",
+            quote: null,
+            subtitles: "As AI tools automate tasks in writing, illustration, voice acting, and video editing, traditional artistic skills are disparaged as 'inefficient'. Creative agency shifts from skilled artisans to prompt engineers and platform operators."
         },
         {
-            timeStart: 115,
-            duration: 25,
-            chapter: "ACT II: DEVALUATION & PRECARITY",
-            title: "Devaluing Human Professional Power",
-            body: "As client budgets shift toward instantaneous AI visual and acoustic generation, creative freelancers face severe downward price pressures, eroding professional autonomy and destabilizing middle-class creative careers.",
-            mediaId: "scene-6"
+            timeStart: 150,
+            timeEnd: 225,
+            chapter: "CHAPTER IV // SHADOW PROLETARIAT OF THE GLOBAL SOUTH",
+            type: "image",
+            url: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1200&q=80",
+            title: "GLOBAL INEQUALITIES",
+            subtitle: "Outsourced Data Annotation and Content Moderation",
+            quote: {
+                text: "Sanitizing algorithms requires traumatizing human labor—outsourced to low-wage workers in Kenya, the Philippines, and Venezuela for a fraction of Western wages.",
+                source: "Labor Studies in Digital Economy"
+            },
+            subtitles: "Behind the illusion of 'clean artificial intelligence' lies a vast, exploited workforce in the Global South doing the dirty work: RLHF, data labeling, bounding box annotation, and filtering toxic content."
         },
         {
-            timeStart: 140,
-            duration: 30,
-            chapter: "ACT III: THE GLOBAL SOUTH GHOST WORK",
-            title: "Hidden Labor Practices in AI Infrastructure",
-            body: "Behind the illusion of automated intelligence lies an army of invisible human workers. AI development requires massive human data annotation, image bounding, text RLHF (Reinforcement Learning from Human Feedback), and violent content filtering.",
-            mediaId: "scene-7"
-        },
-        {
-            timeStart: 170,
-            duration: 30,
-            chapter: "ACT III: GEOPOLITICAL INEQUALITIES",
-            title: "Subcontracted Micro-Labor",
-            body: "These arduous data tasks are routinely outsourced to low-wage workers across Kenya, the Philippines, India, and Venezuela. Operating for pennies per task under intense psychological stress, this <span class='highlight-red'>ghost work</span> underscores deep global inequalities embedded in AI supply chains.",
-            mediaId: "scene-8"
-        },
-        {
-            timeStart: 200,
-            duration: 35,
-            chapter: "ACT IV: CRITICAL RE-EVALUATION",
-            title: "Democratization or Monopoly Expansion?",
-            body: "Proponents claim AI 'democratizes' art creation by granting non-specialists expressive visual tools. However, critical political economy demonstrates that it simultaneously <span class='highlight-gold'>reinforces structural power hierarchies</span>, shifting control over cultural production to cloud infrastructure oligopolies.",
-            mediaId: "scene-4"
-        },
-        {
-            timeStart: 235,
-            duration: 35,
-            chapter: "ACT V: CONCLUSION & FUTURE OUTLOOK",
-            title: "Restructuring Cultural Production",
-            body: "Generative AI is not merely a neutral technological iteration; it is a fundamental restructuring of cultural production, intellectual property, and labor valuation. Reclaiming agency requires transparent dataset auditing, collective bargaining, and equitable revenue distribution.",
-            mediaId: "scene-9"
-        },
-        {
-            timeStart: 270,
-            duration: 30,
-            chapter: "EPILOGUE: CULTURAL FUTURE",
-            title: "Who Controls the Creative Future?",
-            body: "As media industries synthesize human expression into mathematical parameters, the crucial question remains: Will AI empower human artistic flourishment, or will creative human labor be permanently subsumed into corporate algorithmic value extraction?",
-            mediaId: "scene-9"
+            timeStart: 225,
+            timeEnd: 300,
+            chapter: "CHAPTER V // RESTRUCTURING CULTURAL POWER",
+            type: "image",
+            url: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1200&q=80",
+            title: "RECLAIMING CREATIVE FUTURES",
+            subtitle: "Solidarity, Collective Ownership, and Ethical AI",
+            quote: null,
+            subtitles: "Generative AI is not merely a technological evolution; it is a fundamental restructuring of cultural production. Will AI remain an engine of corporate enclosure, or can artists organize to reclaim ownership over technology?"
         }
     ];
 
-    const TOTAL_DURATION = 300; // 5 Minutes in seconds
-
-    // DOM Elements
-    const narrativeTextEl = document.getElementById("narrative-text");
-    const chapterTitleEl = document.getElementById("chapter-title");
-    const timeCodeEl = document.getElementById("time-code");
-    const progressBarEl = document.getElementById("progress-bar");
-    const playBtn = document.getElementById("play-btn");
-    const restartBtn = document.getElementById("restart-btn");
-    const mediaFrames = document.querySelectorAll(".media-frame");
-
-    // Playback State
+    // State Variables
     let currentTime = 0;
+    let duration = 300; // 5 minutes (300 seconds)
     let isPlaying = false;
     let timerInterval = null;
-    let currentFrameIndex = -1;
+    let currentSegmentIndex = -1;
 
-    // Web Audio API Soundtrack Synthesizer (Generates Ambient Cyber Soundtrack)
-    let audioCtx = null;
-    let isAudioInitialized = false;
-    let synthOsc1 = null;
-    let synthOsc2 = null;
+    // DOM Elements
+    const playBtn = document.getElementById('playBtn');
+    const muteBtn = document.getElementById('muteBtn');
+    const fullscreenBtn = document.getElementById('fullscreenBtn');
+    const bgMusic = document.getElementById('bgMusic');
+    const progressBar = document.getElementById('progressBar');
+    const progressContainer = document.getElementById('progressContainer');
+    const currentTimeDisplay = document.getElementById('currentTime');
+    const activeImage = document.getElementById('activeImage');
+    const chapterBadge = document.getElementById('chapterBadge');
+    const titleCard = document.getElementById('titleCard');
+    const headlineText = document.getElementById('headlineText');
+    const subtextText = document.getElementById('subtextText');
+    const quoteCard = document.getElementById('quoteCard');
+    const quoteText = document.getElementById('quoteText');
+    const quoteSource = document.getElementById('quoteSource');
+    const subtitleText = document.getElementById('subtitleText');
 
-    function initAudioEngine() {
-        if (isAudioInitialized) return;
-        
-        const AudioContext = window.AudioContext || window.webkitAudioContext;
-        audioCtx = new AudioContext();
-
-        // Drone Synthesizer Oscillator
-        synthOsc1 = audioCtx.createOscillator();
-        synthOsc2 = audioCtx.createOscillator();
-        const filter = audioCtx.createBiquadFilter();
-        const masterGain = audioCtx.createGain();
-
-        synthOsc1.type = "sawtooth";
-        synthOsc2.type = "sine";
-
-        synthOsc1.frequency.setValueAtTime(55, audioCtx.currentTime); // A1 note
-        synthOsc2.frequency.setValueAtTime(110, audioCtx.currentTime); // A2 note
-
-        filter.type = "lowpass";
-        filter.frequency.setValueAtTime(320, audioCtx.currentTime);
-
-        masterGain.gain.setValueAtTime(0.08, audioCtx.currentTime);
-
-        synthOsc1.connect(filter);
-        synthOsc2.connect(filter);
-        filter.connect(masterGain);
-        masterGain.connect(audioCtx.destination);
-
-        synthOsc1.start();
-        synthOsc2.start();
-
-        // Subtle LFO modulation for cinematic texture
-        const lfo = audioCtx.createOscillator();
-        const lfoGain = audioCtx.createGain();
-        lfo.frequency.setValueAtTime(0.15, audioCtx.currentTime);
-        lfoGain.gain.setValueAtTime(150, audioCtx.currentTime);
-        lfo.connect(filter.frequency);
-        lfo.start();
-
-        isAudioInitialized = true;
-    }
-
-    // Format Seconds to MM:SS
+    // Initialize Video State
     function formatTime(seconds) {
         const mins = Math.floor(seconds / 60);
         const secs = Math.floor(seconds % 60);
         return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
     }
 
-    // Main Update Loop
-    function updateTimeline() {
-        if (!isPlaying) return;
+    function updateState() {
+        // Update Time Display
+        currentTimeDisplay.innerText = formatTime(currentTime);
+        progressBar.style.width = `${(currentTime / duration) * 100}%`;
 
-        currentTime += 0.2;
-        if (currentTime >= TOTAL_DURATION) {
-            currentTime = TOTAL_DURATION;
-            pauseDocumentary();
-        }
+        // Find active sequence
+        const index = mediaSequence.findIndex(item => currentTime >= item.timeStart && currentTime < item.timeEnd);
 
-        // Update HUD
-        timeCodeEl.textContent = `${formatTime(currentTime)} / 05:00`;
-        const progressPercent = (currentTime / TOTAL_DURATION) * 100;
-        progressBarEl.style.width = `${progressPercent}%`;
+        if (index !== -1 && index !== currentSegmentIndex) {
+            currentSegmentIndex = index;
+            const segment = mediaSequence[index];
 
-        // Check Script State
-        renderScriptState(currentTime);
-    }
+            // Update Chapter Badge
+            chapterBadge.innerText = segment.chapter;
 
-    // Render Corresponding Script & Media Visual
-    function renderScriptState(time) {
-        const matchingIndex = scriptMatrix.findIndex(item => 
-            time >= item.timeStart && time < (item.timeStart + item.duration)
-        );
+            // Transition Image Visual
+            activeImage.classList.remove('active');
+            setTimeout(() => {
+                activeImage.src = segment.url;
+                activeImage.classList.add('active');
+            }, 300);
 
-        if (matchingIndex !== -1 && matchingIndex !== currentFrameIndex) {
-            currentFrameIndex = matchingIndex;
-            const state = scriptMatrix[matchingIndex];
+            // Update Subtitles
+            subtitleText.innerText = segment.subtitles;
 
-            // Update Text Content with Fade Effect
-            narrativeTextEl.classList.remove("text-fade-in");
-            void narrativeTextEl.offsetWidth; // Trigger reflow
-            
-            chapterTitleEl.textContent = state.chapter;
-            narrativeTextEl.innerHTML = `
-                <div class="narrative-title">${state.title}</div>
-                <div class="narrative-body">${state.body}</div>
-            `;
-            narrativeTextEl.classList.add("text-fade-in");
+            // Handle Title Overlay / Quote Displays
+            if (segment.title) {
+                headlineText.innerText = segment.title;
+                subtextText.innerText = segment.subtitle;
+                titleCard.classList.add('visible');
+            } else {
+                titleCard.classList.remove('visible');
+            }
 
-            // Update Visual Media Frame Switcher
-            mediaFrames.forEach(frame => frame.classList.remove("active"));
-            const targetMedia = document.getElementById(state.mediaId);
-            if (targetMedia) {
-                targetMedia.classList.add("active");
+            if (segment.quote) {
+                quoteText.innerText = `"${segment.quote.text}"`;
+                quoteSource.innerText = `— ${segment.quote.source}`;
+                quoteCard.classList.add('visible');
+            } else {
+                quoteCard.classList.remove('visible');
             }
         }
+
+        // Loop / End Handler
+        if (currentTime >= duration) {
+            pauseDoc();
+            currentTime = 0;
+        }
     }
 
-    // Playback Controls
-    function playDocumentary() {
-        if (!isAudioInitialized) {
-            initAudioEngine();
-        }
-        if (audioCtx && audioCtx.state === 'suspended') {
-            audioCtx.resume();
-        }
+    function playDoc() {
         isPlaying = true;
-        playBtn.textContent = "PAUSE";
-        timerInterval = setInterval(updateTimeline, 200);
+        playBtn.innerText = "PAUSE";
+        bgMusic.play().catch(() => console.log("Audio autoplay restricted. User interaction required."));
+        timerInterval = setInterval(() => {
+            currentTime++;
+            updateState();
+        }, 1000);
     }
 
-    function pauseDocumentary() {
+    function pauseDoc() {
         isPlaying = false;
-        playBtn.textContent = "PLAY";
+        playBtn.innerText = "PLAY";
+        bgMusic.pause();
         clearInterval(timerInterval);
     }
 
-    function restartDocumentary() {
-        pauseDocumentary();
-        currentTime = 0;
-        currentFrameIndex = -1;
-        timeCodeEl.textContent = "00:00 / 05:00";
-        progressBarEl.style.width = "0%";
-        renderScriptState(0);
-    }
-
     // Event Listeners
-    playBtn.addEventListener("click", () => {
+    playBtn.addEventListener('click', () => {
         if (isPlaying) {
-            pauseDocumentary();
+            pauseDoc();
         } else {
-            playDocumentary();
+            playDoc();
         }
     });
 
-    restartBtn.addEventListener("click", restartDocumentary);
+    muteBtn.addEventListener('click', () => {
+        if (bgMusic.muted) {
+            bgMusic.muted = false;
+            muteBtn.innerText = "MUSIC ON";
+        } else {
+            bgMusic.muted = true;
+            muteBtn.innerText = "MUTED";
+        }
+    });
 
-    // Initial Load Setup
-    renderScriptState(0);
+    progressContainer.addEventListener('click', (e) => {
+        const rect = progressContainer.getBoundingClientRect();
+        const clickX = e.clientX - rect.left;
+        const width = rect.width;
+        currentTime = Math.floor((clickX / width) * duration);
+        updateState();
+    });
+
+    fullscreenBtn.addEventListener('click', () => {
+        const doc = document.getElementById('docContainer');
+        if (!document.fullscreenElement) {
+            doc.requestFullscreen().catch(err => alert(`Fullscreen error: ${err.message}`));
+        } else {
+            document.exitFullscreen();
+        }
+    });
+
+    // Initial Trigger
+    updateState();
 });
