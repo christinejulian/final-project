@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini-Doc: AI & Creative Labor</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="doc-wrapper">
+        <main class="player-container">
+            <div id="media-viewport" class="media-viewport">
+                <div class="overlay-vignette"></div>
+                <img id="doc-image" class="media-element active" src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80" alt="Documentary Visual">
+                <video id="doc-video" class="media-element hidden" loop muted playsinline>
+                    <source src="" type="video/mp4">
+                </video>
+            </div>
+
+            <div class="caption-container">
+                <span id="chapter-tag" class="chapter-tag">CHAPTER 1</span>
+                <h1 id="caption-title" class="caption-title">The Raw Material: Data Extraction</h1>
+                <p id="caption-body" class="caption-body">
+                    Generative AI models rely on vast datasets of human-produced art, writing, and music—turning decades of creative labor into uncompensated training data.
+                </p>
+            </div>
+
+            <div class="controls-bar">
+                <button id="play-pause-btn" class="control-btn">▶ Play</button>
+
+                <div class="timeline-container">
+                    <div id="progress-bar" class="progress-bar"></div>
+                </div>
+
+                <div class="time-display">
+                    <span id="current-time">00:00</span> / <span id="total-time">05:00</span>
+                </div>
+
+                <button id="fullscreen-btn" class="control-btn">⛶</button>
+            </div>
+        </main>
+
+        <aside class="sidebar">
+            <header class="doc-header">
+                <h2>AI & The Restructuring of Creative Labor</h2>
+                <p>A 5-Minute Digital Media Documentary</p>
+            </header>
+
+            <div class="chapter-list">
+                <button class="chapter-btn active" data-index="0">
+                    <span class="ch-num">01</span>
+                    <div class="ch-info">
+                        <h4>Raw Material & Extraction</h4>
+                        <small>0:00 - 1:00</small>
+                    </div>
+                </button>
+
+                <button class="chapter-btn" data-index="1">
+                    <span class="ch-num">02</span>
+                    <div class="ch-info">
+                        <h4>Automating Human Skill</h4>
+                        <small>1:00 - 2:00</small>
+                    </div>
+                </button>
+
+                <button class="chapter-btn" data-index="2">
+                    <span class="ch-num">03</span>
+                    <div class="ch-info">
+                        <h4>The Hidden Ghost Work</h4>
+                        <small>2:00 - 3:00</small>
+                    </div>
+                </button>
+
+                <button class="chapter-btn" data-index="3">
+                    <span class="ch-num">04</span>
+                    <div class="ch-info">
+                        <h4>Value Shift & Monopolies</h4>
+                        <small>3:00 - 4:00</small>
+                    </div>
+                </button>
+
+                <button class="chapter-btn" data-index="4">
+                    <span class="ch-num">05</span>
+                    <div class="ch-info">
+                        <h4>Democratization vs Hierarchy</h4>
+                        <small>4:00 - 5:00</small>
+                    </div>
+                </button>
+            </div>
+
+            <footer class="doc-footer">
+                <p>Midterm Project • Digital Media Economics</p>
+            </footer>
+        </aside>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
