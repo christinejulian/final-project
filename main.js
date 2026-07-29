@@ -1,262 +1,134 @@
-/**
- * Mini-Documentary Interactive Script Engine
- * Topic: Generative AI, Digital Life, and the Restructuring of Creative Labor
- */
+document.addEventListener('DOMContentLoaded', () => {
+  const totalScenes = 5;
+  const targetTotalSeconds = 300; // 5 minute overall timeline budget
+  const sceneDuration = targetTotalSeconds / totalScenes; // 60s per scene budget
 
-const documentaryData = [
-  {
-    id: 1,
-    timeSec: 0,
-    durationSec: 45,
-    chapter: "Chapter 1: The Extractive Engine",
-    title: "How Digital Life Produces & Redistributes Value",
-    narration: "Every click, upload, artwork, and sentence posted online contributes to a massive digital reservoir. Our daily digital life produces immense creative and informational value. However, Generative AI models transform this collective human output into raw material for proprietary training datasets—without explicit consent, compensation, or transparency.",
-    bgImage: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop",
-    summary: "Explores how creative works are scraped without consent or compensation."
-  },
-  {
-    id: 2,
-    timeSec: 45,
-    durationSec: 60,
-    chapter: "Chapter 2: Capital & Concentration",
-    title: "Shift from Human Creators to Tech Giants",
-    narration: "This economic dynamic shifts value away from independent writers, artists, and media workers, transferring financial and cultural capital directly to platform monopolies—corporations owning models like ChatGPT, Gemini, and Sora AI. Human artistic labor is commodified into algorithmic inputs, privatizing profits while socializing creative risk.",
-    bgImage: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1200&auto=format&fit=crop",
-    summary: "Analyzes profit concentration among major AI developers like OpenAI, Google, and Meta."
-  },
-  {
-    id: 3,
-    timeSec: 105,
-    durationSec: 60,
-    chapter: "Chapter 3: Disruption of Creative Skills",
-    title: "Automation Across Writing, Design, and Video",
-    narration: "Generative tools now automate key tasks across graphic design, illustration, copy editing, music composition, and post-production. By replicating styles and synthesis patterns, these systems devalue traditional apprenticeship, craft, and expertise, pressuring media professionals to accept lower wages or faster production turnarounds.",
-    bgImage: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1200&auto=format&fit=crop",
-    summary: "Examines task automation in creative disciplines and wage devaluation."
-  },
-  {
-    id: 4,
-    timeSec: 165,
-    durationSec: 75,
-    chapter: "Chapter 4: The Hidden Supply Chain",
-    title: "Data Annotation & Global South Exploitation",
-    narration: "Behind seamless AI generation lies an invisible hierarchy of labor. Machine learning relies heavily on data annotators, RLHF reviewers, and content moderators. Often outsourced to low-wage labor markets in the Global South under grueling conditions, these hidden workers perform crucial labor while remaining excluded from the immense wealth AI creates.",
-    bgImage: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=1200&auto=format&fit=crop",
-    summary: "Uncovers data labeling and content moderation outsourced to the Global South."
-  },
-  {
-    id: 5,
-    timeSec: 240,
-    durationSec: 60,
-    chapter: "Chapter 5: Conclusion & Future Outlook",
-    title: "Democratization or Cultural Enclosure?",
-    narration: "Does Generative AI democratize artistic expression, or does it reinforce existing digital media monopolies? Evaluating AI requires looking beyond technological novelty. It demands addressing the structural restructuring of creative labor, establishing ethical ownership, and demanding fair compensation for human cultural production.",
-    bgImage: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=1200&auto=format&fit=crop",
-    summary: "Summarizes the ethical trade-offs between democratization and labor exploitation."
-  }
-];
+  let currentScene = 1;
+  let isPlaying = false;
+  let timerInterval = null;
+  let elapsedSeconds = 0;
 
-const TOTAL_DURATION_SEC = 300; // 5 minutes total runtime
+  // DOM Elements
+  const btnPlay = document.getElementById('btn-play');
+  const btnPrev = document.getElementById('btn-prev');
+  const btnNext = document.getElementById('btn-next');
+  const btnMute = document.getElementById('btn-mute');
+  const progressBar = document.getElementById('progress-bar');
+  const timeDisplay = document.getElementById('time-display');
+  const bgMusic = document.getElementById('bg-music');
 
-// State Variables
-let currentSlideIndex = 0;
-let isPlaying = false;
-let currentTimeSec = 0;
-let playbackTimer = null;
-let speechEnabled = true;
+  // Web Speech API Narrator Setup
+  const synth = window.speechSynthesis;
 
-// DOM Elements
-const playPauseBtn = document.getElementById("playPauseBtn");
-const playIcon = document.getElementById("playIcon");
-const progressBar = document.getElementById("progressBar");
-const progressBarContainer = document.getElementById("progressBarContainer");
-const currentTimeEl = document.getElementById("currentTime");
-const totalTimeEl = document.getElementById("totalTime");
-const chapterTag = document.getElementById("chapterTag");
-const slideTitle = document.getElementById("slideTitle");
-const narrationText = document.getElementById("narrationText");
-const mediaBg = document.getElementById("mediaBg");
-const chapterGrid = document.getElementById("chapterGrid");
-const narrationToggle = document.getElementById("narrationToggle");
-const voiceStatus = document.getElementById("voiceStatus");
+  // Initialize Scene Display
+  function updateScene(sceneIndex) {
+    currentScene = sceneIndex;
 
-// Web Speech API Synthesis
-const synth = window.speechSynthesis;
-
-// Initialize Player
-function init() {
-  renderChapters();
-  loadSlide(0);
-  
-  playPauseBtn.addEventListener("click", togglePlay);
-  progressBarContainer.addEventListener("click", seekTimeline);
-  narrationToggle.addEventListener("click", toggleVoice);
-  
-  totalTimeEl.textContent = formatTime(TOTAL_DURATION_SEC);
-}
-
-// Render Chapter Cards in Directory
-function renderChapters() {
-  chapterGrid.innerHTML = "";
-  documentaryData.forEach((item, index) => {
-    const card = document.createElement("div");
-    card.className = `chapter-card ${index === 0 ? "active" : ""}`;
-    card.id = `chapter-card-${index}`;
-    card.onclick = () => jumpToChapter(index);
-    
-    card.innerHTML = `
-      <span class="time-stamp">${formatTime(item.timeSec)}</span>
-      <h4>${item.chapter}</h4>
-      <p>${item.summary}</p>
-    `;
-    chapterGrid.appendChild(card);
-  });
-}
-
-// Load Slide Visuals & Text
-function loadSlide(index) {
-  currentSlideIndex = index;
-  const slide = documentaryData[index];
-
-  chapterTag.textContent = slide.chapter;
-  slideTitle.textContent = slide.title;
-  narrationText.textContent = slide.narration;
-
-  // Background Media Transition
-  mediaBg.style.backgroundImage = `url('${slide.bgImage}')`;
-  mediaBg.classList.remove("kenburns");
-  void mediaBg.offsetWidth; // Force reflow
-  mediaBg.classList.add("kenburns");
-
-  // Highlight Active Chapter in Grid
-  document.querySelectorAll(".chapter-card").forEach((card, idx) => {
-    if (idx === index) {
-      card.classList.add("active");
-    } else {
-      card.classList.remove("active");
-    }
-  });
-
-  if (isPlaying && speechEnabled) {
-    speakNarration(slide.narration);
-  }
-}
-
-// Playback Logic
-function togglePlay() {
-  if (isPlaying) {
-    pauseDocumentary();
-  } else {
-    playDocumentary();
-  }
-}
-
-function playDocumentary() {
-  isPlaying = true;
-  playIcon.textContent = "⏸ Pause Documentary";
-
-  playbackTimer = setInterval(() => {
-    currentTimeSec++;
-    updateProgress();
-
-    // Check if time crosses into next slide
-    const nextSlideIndex = documentaryData.findIndex((item, idx) => {
-      const nextItem = documentaryData[idx + 1];
-      if (nextItem) {
-        return currentTimeSec >= item.timeSec && currentTimeSec < nextItem.timeSec;
-      }
-      return currentTimeSec >= item.timeSec;
+    // Update Media Elements
+    document.querySelectorAll('.scene-media').forEach(el => {
+      el.classList.toggle('active', parseInt(el.dataset.scene) === currentScene);
     });
 
-    if (nextSlideIndex !== -1 && nextSlideIndex !== currentSlideIndex) {
-      loadSlide(nextSlideIndex);
-    }
+    // Update Text Elements
+    document.querySelectorAll('.scene-text').forEach(el => {
+      el.classList.toggle('active', parseInt(el.dataset.scene) === currentScene);
+    });
 
-    if (currentTimeSec >= TOTAL_DURATION_SEC) {
-      pauseDocumentary();
-      currentTimeSec = 0;
-      loadSlide(0);
-    }
-  }, 1000);
-
-  if (speechEnabled) {
-    speakNarration(documentaryData[currentSlideIndex].narration);
-  }
-}
-
-function pauseDocumentary() {
-  isPlaying = false;
-  playIcon.textContent = "▶ Play Documentary";
-  clearInterval(playbackTimer);
-  if (synth) synth.cancel();
-}
-
-function updateProgress() {
-  const percentage = (currentTimeSec / TOTAL_DURATION_SEC) * 100;
-  progressBar.style.width = `${percentage}%`;
-  currentTimeEl.textContent = formatTime(currentTimeSec);
-}
-
-function seekTimeline(e) {
-  const rect = progressBarContainer.getBoundingClientRect();
-  const clickX = e.clientX - rect.left;
-  const width = rect.width;
-  const percentage = clickX / width;
-
-  currentTimeSec = Math.floor(percentage * TOTAL_DURATION_SEC);
-  updateProgress();
-
-  // Find corresponding slide
-  for (let i = documentaryData.length - 1; i >= 0; i--) {
-    if (currentTimeSec >= documentaryData[i].timeSec) {
-      loadSlide(i);
-      break;
+    // Trigger Narration if Playing
+    if (isPlaying) {
+      speakCurrentScene();
     }
   }
-}
 
-function jumpToChapter(index) {
-  currentTimeSec = documentaryData[index].timeSec;
-  updateProgress();
-  loadSlide(index);
-  if (!isPlaying) {
-    playDocumentary();
+  // Voice Narration Synthesis
+  function speakCurrentScene() {
+    synth.cancel(); // Stop current speech
+
+    const activeText = document.querySelector(`.scene-text[data-scene="${currentScene}"] .narration`);
+    if (!activeText) return;
+
+    const utterance = new SpeechSynthesisUtterance(activeText.innerText);
+    utterance.rate = 0.95; // Steady, calm narrative cadence
+    utterance.pitch = 1.0;
+
+    // Optional: pick an English voice if available
+    const voices = synth.getVoices();
+    const selectedVoice = voices.find(v => v.lang.startsWith('en')) || voices[0];
+    if (selectedVoice) utterance.voice = selectedVoice;
+
+    synth.speak(utterance);
   }
-}
 
-// Voiceover Narration (Browser Speech Synthesis)
-function speakNarration(text) {
-  if (!('speechSynthesis' in window)) return;
-  synth.cancel(); // Stop ongoing speech
+  // Timer & Progress Management
+  function startTimer() {
+    clearInterval(timerInterval);
+    timerInterval = setInterval(() => {
+      if (elapsedSeconds < targetTotalSeconds) {
+        elapsedSeconds++;
+        updateTimelineDisplay();
+      } else {
+        pauseDocumentary();
+      }
+    }, 1000);
+  }
 
-  const utterance = new SpeechSynthesisUtterance(text);
-  utterance.rate = 0.95; // Steady documentary pacing
-  utterance.pitch = 1.0;
+  function pauseTimer() {
+    clearInterval(timerInterval);
+  }
 
-  // Select smooth voice if available
-  const voices = synth.getVoices();
-  const selectedVoice = voices.find(v => v.lang.startsWith("en") && (v.name.includes("Natural") || v.name.includes("Google"))) || voices[0];
-  if (selectedVoice) utterance.voice = selectedVoice;
+  function updateTimelineDisplay() {
+    const mins = Math.floor(elapsedSeconds / 60).toString().padStart(2, '0');
+    const secs = (elapsedSeconds % 60).toString().padStart(2, '0');
+    timeDisplay.innerText = `${mins}:${secs} / 05:00`;
 
-  synth.speak(utterance);
-}
+    const progressPercent = (elapsedSeconds / targetTotalSeconds) * 100;
+    progressBar.style.width = `${progressPercent}%`;
+  }
 
-function toggleVoice() {
-  speechEnabled = !speechEnabled;
-  voiceStatus.textContent = speechEnabled ? "ON" : "OFF";
-  if (!speechEnabled && synth) {
+  // Controls Event Listeners
+  function playDocumentary() {
+    isPlaying = true;
+    btnPlay.innerText = '⏸ Pause';
+    bgMusic.volume = 0.3; // Low ambient background sound
+    bgMusic.play().catch(() => console.log('Audio autoplay prevented'));
+    speakCurrentScene();
+    startTimer();
+  }
+
+  function pauseDocumentary() {
+    isPlaying = false;
+    btnPlay.innerText = '▶ Play Documentary';
     synth.cancel();
-  } else if (isPlaying) {
-    speakNarration(documentaryData[currentSlideIndex].narration);
+    bgMusic.pause();
+    pauseTimer();
   }
-}
 
-// Utility: Format seconds into MM:SS
-function formatTime(seconds) {
-  const mins = Math.floor(seconds / 60);
-  const secs = Math.floor(seconds % 60);
-  return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-}
+  btnPlay.addEventListener('click', () => {
+    if (isPlaying) {
+      pauseDocumentary();
+    } else {
+      playDocumentary();
+    }
+  });
 
-// Initialize on page load
-window.addEventListener("DOMContentLoaded", init);
+  btnNext.addEventListener('click', () => {
+    if (currentScene < totalScenes) {
+      updateScene(currentScene + 1);
+      elapsedSeconds = (currentScene - 1) * sceneDuration;
+      updateTimelineDisplay();
+    }
+  });
+
+  btnPrev.addEventListener('click', () => {
+    if (currentScene > 1) {
+      updateScene(currentScene - 1);
+      elapsedSeconds = (currentScene - 1) * sceneDuration;
+      updateTimelineDisplay();
+    }
+  });
+
+  btnMute.addEventListener('click', () => {
+    bgMusic.muted = !bgMusic.muted;
+    btnMute.innerText = bgMusic.muted ? '🔇 Muted' : '🔊 Music';
+  });
+});
