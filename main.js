@@ -1,41 +1,42 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const slides = document.querySelectorAll(".slide");
-  const prevBtn = document.getElementById("prev-btn");
-  const nextBtn = document.getElementById("next-btn");
-  const currentSlideEl = document.getElementById("current-slide");
-  const totalSlidesEl = document.getElementById("total-slides");
-  const dotsContainer = document.getElementById("dots-container");
+document.addEventListener('DOMContentLoaded', () => {
+  const slides = document.querySelectorAll('.slide');
+  const prevBtn = document.getElementById('prev-btn');
+  const nextBtn = document.getElementById('next-btn');
+  const currentSlideEl = document.getElementById('current-slide');
+  const totalSlidesEl = document.getElementById('total-slides');
+  const dotsContainer = document.getElementById('dots-container');
 
   let currentIndex = 0;
   const totalSlides = slides.length;
 
+  // Initialize slide total
   totalSlidesEl.textContent = totalSlides;
 
-  // Render navigation dots dynamically
+  // Create pagination dots
   slides.forEach((_, index) => {
-    const dot = document.createElement("div");
-    dot.classList.add("dot");
-    if (index === 0) dot.classList.add("active");
-    dot.addEventListener("click", () => goToSlide(index));
+    const dot = document.createElement('div');
+    dot.classList.add('dot');
+    if (index === 0) dot.classList.add('active');
+    dot.addEventListener('click', () => goToSlide(index));
     dotsContainer.appendChild(dot);
   });
 
-  const dots = document.querySelectorAll(".dot");
+  const dots = document.querySelectorAll('.dot');
 
   function updateSlideState() {
     slides.forEach((slide, index) => {
-      if (index === currentIndex) {
-        slide.classList.add("active");
-      } else {
-        slide.classList.remove("active");
-      }
+      slide.classList.toggle('active', index === currentIndex);
     });
 
     dots.forEach((dot, index) => {
-      dot.classList.toggle("active", index === currentIndex);
+      dot.classList.toggle('active', index === currentIndex);
     });
 
     currentSlideEl.textContent = currentIndex + 1;
+
+    // Update button states
+    prevBtn.disabled = currentIndex === 0;
+    nextBtn.disabled = currentIndex === totalSlides - 1;
   }
 
   function goToSlide(index) {
@@ -59,16 +60,19 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Event Listeners for buttons
-  nextBtn.addEventListener("click", nextSlide);
-  prevBtn.addEventListener("click", prevSlide);
+  // Event Listeners
+  nextBtn.addEventListener('click', nextSlide);
+  prevBtn.addEventListener('click', prevSlide);
 
-  // Keyboard Navigation (Arrow Keys and Space)
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "ArrowRight" || e.key === "Space") {
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === 'Space') {
       nextSlide();
-    } else if (e.key === "ArrowLeft") {
+    } else if (e.key === 'ArrowLeft') {
       prevSlide();
     }
   });
+
+  // Initial State Setup
+  updateSlideState();
 });
