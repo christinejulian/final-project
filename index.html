@@ -1,83 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ghost in the Machine: Value, AI, and Creative Labor</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Midterm Presentation | Generative AI & Creative Labor</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
 </head>
 <body>
 
-    <div class="documentary-container" id="docContainer">
-        
-        <div class="visual-viewport">
-            <div class="ken-burns-wrapper" id="kenBurnsWrapper">
-                <img id="bgVisual" src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1920&auto=format&fit=crop" alt="Abstract AI Neural Network Art">
-            </div>
-            <div class="vignette-overlay"></div>
-            <div class="grid-overlay"></div>
-            <div class="scanline"></div>
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="logo">LABOR // AI</div>
+    <div class="slide-counter"><span id="current-slide">1</span> / <span id="total-slides">6</span></div>
+  </header>
+
+  <!-- Slide Container -->
+  <main class="presentation-container">
+
+    <!-- Slide 1: Title & Framing -->
+    <section class="slide active" id="slide-1">
+      <div class="slide-content grid-2">
+        <div class="text-block">
+          <span class="badge">Midterm Thesis</span>
+          <h1>The Restructuring of Creative Labor</h1>
+          <p class="subtitle">How Generative AI shifts economic, cultural, and professional power within digital media industries.</p>
+          <p class="question-callout">"How does my digital life produce, consume, and redistribute value, and for whom?"</p>
         </div>
-
-        <div class="text-viewport">
-            <div class="chapter-badge" id="chapterBadge">CHAPTER 1 // INTRODUCTION</div>
-            
-            <div class="title-card-container" id="titleCard">
-                <h1 class="main-title" id="mainTitle">GHOST IN THE MACHINE</h1>
-                <h2 class="sub-title" id="subTitle">How Generative AI Produces, Consumes, and Redistributes Value</h2>
-            </div>
-
-            <div class="narrative-box" id="narrativeBox">
-                <p class="narrative-text" id="narrativeText">Click PLAY to begin the 5-minute visual mini-documentary.</p>
-            </div>
-
-            <div class="stat-callout" id="statCallout">
-                <span class="stat-number" id="statNumber">5.8B+</span>
-                <span class="stat-label" id="statLabel">Images scraped without artist consent in LAION-5B training datasets.</span>
-            </div>
+        <div class="media-block">
+          <div class="video-container">
+            <iframe src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?controls=1" title="Presentation Intro" allowfullscreen></iframe>
+            <span class="caption">Overview: Generative AI, Data Extractivism, and Digital Value</span>
+          </div>
         </div>
+      </div>
+    </section>
 
-        <div class="audio-visualizer" id="visualizer">
-            <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
-            <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+    <!-- Slide 2: Data Extraction & Value Shift -->
+    <section class="slide" id="slide-2">
+      <div class="slide-content grid-2">
+        <div class="media-block">
+          <img src="http://googleusercontent.com/image_collection/image_retrieval/1361913364015854281_0" alt="Digital Artist Working" class="slide-img" />
+          <p class="caption">Human artistry turned into training data without consent or compensation.</p>
         </div>
-
-        <div class="controls-layer">
-            <div class="timeline-bar-container" id="timelineContainer">
-                <div class="timeline-progress" id="timelineProgress"></div>
-                <div class="chapter-marker" style="left: 0%;"></div>
-                <div class="chapter-marker" style="left: 20%;"></div>
-                <div class="chapter-marker" style="left: 40%;"></div>
-                <div class="chapter-marker" style="left: 60%;"></div>
-                <div class="chapter-marker" style="left: 80%;"></div>
-            </div>
-
-            <div class="control-buttons">
-                <button id="playBtn" class="btn">PLAY</button>
-                <button id="restartBtn" class="btn secondary">RESTART</button>
-                <div class="time-display">
-                    <span id="currentTime">00:00</span> / <span id="totalTime">05:00</span>
-                </div>
-            </div>
-
-            <div class="chapter-nav">
-                <button class="chap-btn" data-time="0">Ch 1: Extraction</button>
-                <button class="chap-btn" data-time="60">Ch 2: Scraping</button>
-                <button class="chap-btn" data-time="120">Ch 3: Disruption</button>
-                <button class="chap-btn" data-time="180">Ch 4: Ghost Labor</button>
-                <button class="chap-btn" data-time="240">Ch 5: Synthesis</button>
-            </div>
+        <div class="text-block">
+          <h2>1. Data Extractivism</h2>
+          <p class="lead">Artists' output as raw material for tech platforms.</p>
+          <ul>
+            <li><strong>Unconsented Ingestion:</strong> LLMs and diffusion models rely on massive scrape datasets of human work.</li>
+            <li><strong>Value Extraction:</strong> Value moves away from original creators toward platform operators (e.g., OpenAI, Google, Runway).</li>
+            <li><strong>Ethical Crisis:</strong> Raises fundamental questions about digital copyright, ownership, and platform exploitation.</li>
+          </ul>
         </div>
+      </div>
+    </section>
 
-    </div>
+    <!-- Slide 3: Automation & Devaluation -->
+    <section class="slide" id="slide-3">
+      <div class="slide-content grid-2">
+        <div class="text-block">
+          <h2>2. Disparaging Traditional Skills</h2>
+          <p class="lead">Automating tasks across writing, design, music, and video editing.</p>
+          <div class="card-grid">
+            <div class="card">
+              <h3>Writing & Copy</h3>
+              <p>Automating drafts, marketing copy, and news summaries.</p>
+            </div>
+            <div class="card">
+              <h3>Design & Art</h3>
+              <p>Generative image synthesis replacing entry-level illustration work.</p>
+            </div>
+            <div class="card">
+              <h3>Audio & Video</h3>
+              <p>Automated mixing, voice synthesis, and generative video clips (Sora).</p>
+            </div>
+          </div>
+        </div>
+        <div class="media-block">
+          <div class="quote-box">
+            <blockquote>"Automation doesn't just increase efficiency; it redefines whose labor is valued and whose skills are deemed obsolete."</blockquote>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <audio id="bgAudio" loop crossorigin="anonymous">
-        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=ambient-atmospheric-112704.mp3" type="audio/mpeg">
-    </audio>
+    <!-- Slide 4: The Hidden Labor Force -->
+    <section class="slide" id="slide-4">
+      <div class="slide-content grid-2">
+        <div class="media-block">
+          <img src="http://googleusercontent.com/image_collection/image_retrieval/6907208925760761538_0" alt="Data Infrastructure and Tech Labor" class="slide-img" />
+          <p class="caption">Low-wage data annotators and content moderators power modern AI models.</p>
+        </div>
+        <div class="text-block">
+          <h2>3. Global Inequalities in AI</h2>
+          <p class="lead">The invisible human labor behind "automated" intelligence.</p>
+          <ul>
+            <li><strong>Outsourced Annotation:</strong> Heavy reliance on workers in the Global South for data labeling, RLHF, and moderation.</li>
+            <li><strong>Precarious Conditions:</strong> Low-wage, high-stress labor environments necessary to keep models safe and accurate.</li>
+            <li><strong>Embedded Hierarchy:</strong> Reinforces colonial-style economic dependencies in the global tech supply chain.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
 
-    <script src="main.js"></script>
+    <!-- Slide 5: Expansion vs. Reinforcement -->
+    <section class="slide" id="slide-5">
+      <div class="slide-content grid-1">
+        <div class="text-block text-center">
+          <h2>4. Expansion or Hierarchy?</h2>
+          <p class="lead">Weighing the dual nature of AI in cultural production.</p>
+        </div>
+        <div class="comparison-grid">
+          <div class="comparison-card positive">
+            <h3>Democratization & Opportunity</h3>
+            <ul>
+              <li>Lowers barrier to entry for solo creators and indie studios.</li>
+              <li>Enables rapid prototyping and new cross-medium experimentation.</li>
+              <li>Accelerates routine iterative tasks.</li>
+            </ul>
+          </div>
+          <div class="comparison-card negative">
+            <h3>Corporate Consolidation</h3>
+            <ul>
+              <li>Concentrates capital and infrastructure control in tech monopolies.</li>
+              <li>Devalues domain expertise and creative fair compensation.</li>
+              <li>Homogenizes cultural output based on statistical averages.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 6: Conclusion -->
+    <section class="slide" id="slide-6">
+      <div class="slide-content grid-1 text-center">
+        <span class="badge">Conclusion</span>
+        <h2>A Structural Restructuring of Labor</h2>
+        <p class="conclusion-text">
+          Generative AI is not merely a technical upgrade—it represents a <strong>fundamental restructuring of creative labor and cultural production</strong>. Rebalancing this economy requires transparency, fair compensation, and ethical oversight for creators worldwide.
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Navigation Controls -->
+  <footer class="controls">
+    <button id="prev-btn" class="nav-btn" aria-label="Previous Slide">← Previous</button>
+    <div class="dots-container" id="dots-container"></div>
+    <button id="next-btn" class="nav-btn" aria-label="Next Slide">Next →</button>
+  </footer>
+
+  <script src="main.js"></script>
 </body>
 </html>
