@@ -1,78 +1,62 @@
 document.addEventListener('DOMContentLoaded', () => {
   const slides = document.querySelectorAll('.slide');
-  const prevBtn = document.getElementById('prev-btn');
-  const nextBtn = document.getElementById('next-btn');
-  const currentSlideEl = document.getElementById('current-slide');
-  const totalSlidesEl = document.getElementById('total-slides');
-  const dotsContainer = document.getElementById('dots-container');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const slideCounter = document.getElementById('slideCounter');
+  const progressBar = document.getElementById('progressBar');
 
-  let currentIndex = 0;
+  let currentSlide = 0;
   const totalSlides = slides.length;
 
-  // Initialize slide total
-  totalSlidesEl.textContent = totalSlides;
-
-  // Create pagination dots
-  slides.forEach((_, index) => {
-    const dot = document.createElement('div');
-    dot.classList.add('dot');
-    if (index === 0) dot.classList.add('active');
-    dot.addEventListener('click', () => goToSlide(index));
-    dotsContainer.appendChild(dot);
-  });
-
-  const dots = document.querySelectorAll('.dot');
-
-  function updateSlideState() {
-    slides.forEach((slide, index) => {
-      slide.classList.toggle('active', index === currentIndex);
+  function updateSlide(index) {
+    slides.forEach((slide, idx) => {
+      if (idx === index) {
+        slide.classList.add('active');
+      } else {
+        slide.classList.remove('active');
+      }
     });
 
-    dots.forEach((dot, index) => {
-      dot.classList.toggle('active', index === currentIndex);
-    });
+    // Update Counter & Progress Bar
+    slideCounter.textContent = `${index + 1} / ${totalSlides}`;
+    const progressPercent = ((index + 1) / totalSlides) * 100;
+    progressBar.style.width = `${progressPercent}%`;
 
-    currentSlideEl.textContent = currentIndex + 1;
-
-    // Update button states
-    prevBtn.disabled = currentIndex === 0;
-    nextBtn.disabled = currentIndex === totalSlides - 1;
-  }
-
-  function goToSlide(index) {
-    if (index >= 0 && index < totalSlides) {
-      currentIndex = index;
-      updateSlideState();
-    }
-  }
-
-  function nextSlide() {
-    if (currentIndex < totalSlides - 1) {
-      currentIndex++;
-      updateSlideState();
-    }
-  }
-
-  function prevSlide() {
-    if (currentIndex > 0) {
-      currentIndex--;
-      updateSlideState();
-    }
+    // Button States
+    prevBtn.disabled = index === 0;
+    nextBtn.disabled = index === totalSlides - 1;
   }
 
   // Event Listeners
-  nextBtn.addEventListener('click', nextSlide);
-  prevBtn.addEventListener('click', prevSlide);
-
-  // Keyboard navigation
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowRight' || e.key === 'Space') {
-      nextSlide();
-    } else if (e.key === 'ArrowLeft') {
-      prevSlide();
+  prevBtn.addEventListener('click', () => {
+    if (currentSlide > 0) {
+      currentSlide--;
+      updateSlide(currentSlide);
     }
   });
 
-  // Initial State Setup
-  updateSlideState();
+  nextBtn.addEventListener('click', () => {
+    if (currentSlide < totalSlides - 1) {
+      currentSlide++;
+      updateSlide(currentSlide);
+    }
+  });
+
+  // Keyboard Navigation
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === 'Space') {
+      if (currentSlide < totalSlides - 1) {
+        currentSlide++;
+        updateSlide(currentSlide);
+      }
+    } else if (e.key === 'ArrowLeft') {
+      if (currentSlide > 0) {
+        currentSlide--;
+        updateSlide(currentSlide);
+      }
+    }
+  });
+
+  // Initialize
+  updateSlide(currentSlide);
 });
