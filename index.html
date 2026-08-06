@@ -3,53 +3,127 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Generative AI & Creative Labor Showcase</title>
+  <title>Generative AI & Creative Labor | Christine Julian</title>
   <style>
+    :root {
+      --bg-color: #0b0d17;
+      --card-bg: #151828;
+      --accent-color: #6366f1;
+      --accent-hover: #4f46e5;
+      --text-main: #ffffff;
+      --text-muted: #94a3b8;
+      --border-color: #2e344d;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
-      font-family: Arial, sans-serif;
-      background-color: #121212;
-      color: #ffffff;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-main);
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
-      margin: 0;
+      padding: 20px;
     }
 
     /* Showcase Card Container */
     .showcase-card {
-      background: #1e1e2e;
-      border-radius: 12px;
-      padding: 30px;
-      max-width: 500px;
-      text-align: center;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 40px;
+      max-width: 650px;
+      width: 100%;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(99, 102, 241, 0.15);
+      color: #818cf8;
+      padding: 6px 14px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 16px;
     }
 
     .showcase-card h1 {
-      font-size: 1.8rem;
-      margin-bottom: 10px;
+      font-size: 2.2rem;
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+
+    .showcase-card .author {
+      font-size: 1.1rem;
+      color: var(--accent-color);
+      font-weight: 500;
+      margin-bottom: 20px;
     }
 
     .showcase-card p {
-      color: #a0a0b0;
-      margin-bottom: 25px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      font-size: 0.98rem;
+      margin-bottom: 24px;
+    }
+
+    /* Topic Highlights */
+    .topics-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 30px;
+    }
+
+    .topic-tag {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      color: #cbd5e1;
     }
 
     /* Trigger Button */
     .open-btn {
-      background-color: #6366f1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      background-color: var(--accent-color);
       color: white;
       border: none;
-      padding: 12px 24px;
+      padding: 14px 28px;
       font-size: 1rem;
-      border-radius: 6px;
+      font-weight: 600;
+      border-radius: 8px;
       cursor: pointer;
-      transition: background 0.3s ease;
+      transition: all 0.3s ease;
     }
 
     .open-btn:hover {
-      background-color: #4f46e5;
+      background-color: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
+    }
+
+    /* Play Icon */
+    .play-icon {
+      width: 0;
+      height: 0;
+      border-top: 6px solid transparent;
+      border-bottom: 6px solid transparent;
+      border-left: 10px solid white;
     }
 
     /* Modal Overlay */
@@ -59,13 +133,15 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.85);
+      background: rgba(0, 0, 0, 0.9);
+      backdrop-filter: blur(5px);
       display: flex;
       justify-content: center;
       align-items: center;
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.3s ease;
+      z-index: 1000;
     }
 
     .modal-overlay.active {
@@ -76,18 +152,21 @@
     /* Modal Content Box */
     .modal-content {
       background: #000;
-      width: 90%;
-      max-width: 800px;
-      border-radius: 10px;
+      width: 95%;
+      max-width: 900px;
+      border-radius: 12px;
       overflow: hidden;
       position: relative;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+      border: 1px solid var(--border-color);
     }
 
-    /* Responsive Video Wrapper */
+    /* Responsive Video Wrapper (16:9) */
     .video-container {
       position: relative;
-      padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+      padding-bottom: 56.25%;
       height: 0;
+      background: #000;
     }
 
     .video-container video {
@@ -101,17 +180,25 @@
     /* Close Button */
     .close-btn {
       position: absolute;
-      top: 10px;
-      right: 15px;
+      top: 12px;
+      right: 16px;
       color: #fff;
-      font-size: 28px;
-      font-weight: bold;
+      font-size: 24px;
+      line-height: 1;
       cursor: pointer;
       z-index: 10;
+      background: rgba(0, 0, 0, 0.6);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
     }
 
     .close-btn:hover {
-      color: #ff4d4d;
+      background: rgba(239, 68, 68, 0.8);
     }
   </style>
 </head>
@@ -119,9 +206,24 @@
 
   <!-- Main Showcase Container -->
   <div class="showcase-card">
+    <span class="badge">Digital Media & Economic Power Analysis</span>
     <h1>Generative AI & Creative Labor</h1>
-    <p>By Christine Julian</p>
-    <button class="open-btn" id="openModal">Watch Presentation</button>
+    <div class="author">By Christine Julian</div>
+    
+    <p>
+      An in-depth presentation examining the legal, economic, and ethical crossroads of generative models, corporate value extraction, and the ghost labor powering artificial intelligence.
+    </p>
+
+    <div class="topics-list">
+      <span class="topic-tag">Value Extraction Engine</span>
+      <span class="topic-tag">Hidden Labor Force</span>
+      <span class="topic-tag">Automation & Industry Shifts</span>
+      <span class="topic-tag">Ethical Imperatives</span>
+    </div>
+
+    <button class="open-btn" id="openModal">
+      <span class="play-icon"></span> Watch Presentation
+    </button>
   </div>
 
   <!-- Video Modal -->
@@ -129,8 +231,7 @@
     <div class="modal-content">
       <span class="close-btn" id="closeModal">&times;</span>
       <div class="video-container">
-        <!-- Video configured with exact file name and encoded spaces -->
-        <video id="presentationVideo" controls playsinline>
+        <video id="presentationVideo" controls playsinline preload="metadata">
           <source src="Julian%20_Christine-Final.mp4" type="video/mp4">
           Your browser does not support the video tag.
         </video>
@@ -144,30 +245,37 @@
     const modalOverlay = document.getElementById('modalOverlay');
     const video = document.getElementById('presentationVideo');
 
-    // Open modal and attempt to play video
+    // Open modal and play presentation
     openBtn.addEventListener('click', () => {
       modalOverlay.classList.add('active');
       
       const playPromise = video.play();
       if (playPromise !== undefined) {
         playPromise.catch((error) => {
-          console.log("Autoplay prevented or video failed to play:", error);
+          console.log("Playback prevented:", error);
         });
       }
     });
 
-    // Function to close modal and reset video
+    // Close modal and stop playback
     function closeModal() {
       modalOverlay.classList.remove('active');
       video.pause();
-      video.currentTime = 0; // Reset video to start
+      video.currentTime = 0;
     }
 
     closeBtn.addEventListener('click', closeModal);
 
-    // Close when clicking outside video frame
+    // Close modal on background click
     modalOverlay.addEventListener('click', (e) => {
       if (e.target === modalOverlay) {
+        closeModal();
+      }
+    });
+
+    // Close modal on ESC key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
         closeModal();
       }
     });
