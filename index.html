@@ -1,153 +1,177 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Generative AI & Creative Labor | Value Extraction & Restructuring</title>
-  <link rel="stylesheet" href="style.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generative AI & Creative Labor Showcase</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #121212;
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    /* Showcase Card Container */
+    .showcase-card {
+      background: #1e1e2e;
+      border-radius: 12px;
+      padding: 30px;
+      max-width: 500px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .showcase-card h1 {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+    }
+
+    .showcase-card p {
+      color: #a0a0b0;
+      margin-bottom: 25px;
+    }
+
+    /* Trigger Button */
+    .open-btn {
+      background-color: #6366f1;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      font-size: 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .open-btn:hover {
+      background-color: #4f46e5;
+    }
+
+    /* Modal Overlay */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Modal Content Box */
+    .modal-content {
+      background: #000;
+      width: 90%;
+      max-width: 800px;
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Responsive Video Wrapper */
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+      height: 0;
+    }
+
+    .video-container video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Close Button */
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      color: #fff;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+      z-index: 10;
+    }
+
+    .close-btn:hover {
+      color: #ff4d4d;
+    }
+  </style>
 </head>
 <body>
 
-  <!-- Top Progress Bar -->
-  <div class="progress-container">
-    <div class="progress-bar" id="progressBar"></div>
+  <!-- Main Showcase Container -->
+  <div class="showcase-card">
+    <h1>Generative AI & Creative Labor</h1>
+    <p>By Christine Julian</p>
+    <button class="open-btn" id="openModal">Watch Presentation</button>
   </div>
 
-  <main class="presentation-deck">
+  <!-- Video Modal -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-content">
+      <span class="close-btn" id="closeModal">&times;</span>
+      <div class="video-container">
+        <!-- Video configured with exact file name and encoded spaces -->
+        <video id="presentationVideo" controls playsinline>
+          <source src="Julian%20_Christine-Final.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    </div>
+  </div>
 
-    <!-- Slide 1: Title -->
-    <section class="slide active" data-slide="0">
-      <div class="slide-content hero-content">
-        <span class="badge">Digital Value & Political Economy</span>
-        <h1>Generative AI & <br><span class="accent-text">Creative Labor</span></h1>
-        <p class="subtitle">Disrupting economic, cultural, and professional power within digital media industries.</p>
-        <div class="meta-tag">Final Research Presentation</div>
-      </div>
-      <div class="slide-visual">
-        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1000&q=80" alt="Abstract digital waves" />
-      </div>
-    </section>
+  <script>
+    const openBtn = document.getElementById('openModal');
+    const closeBtn = document.getElementById('closeModal');
+    const modalOverlay = document.getElementById('modalOverlay');
+    const video = document.getElementById('presentationVideo');
 
-    <!-- Slide 2: Central Framing Question -->
-    <section class="slide" data-slide="1">
-      <div class="slide-content">
-        <span class="slide-num">01 / Key Question</span>
-        <h2>How Does My Digital Life <br><span class="accent-text">Produce, Consume & Redistribute Value?</span></h2>
-        <div class="card-grid">
-          <div class="card">
-            <h3>Production</h3>
-            <p>Every keystroke, uploads, and artistic outputs are captured as uncompensated training datasets.</p>
-          </div>
-          <div class="card">
-            <h3>Consumption</h3>
-            <p>We access automated media, trading creative agency for speed, convenience, and low friction.</p>
-          </div>
-          <div class="card">
-            <h3>Redistribution</h3>
-            <p>Value shifts away from independent human creators directly toward centralized cloud capital platforms.</p>
-          </div>
-        </div>
-      </div>
-    </section>
+    // Open modal and attempt to play video
+    openBtn.addEventListener('click', () => {
+      modalOverlay.classList.add('active');
+      
+      const playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise.catch((error) => {
+          console.log("Autoplay prevented or video failed to play:", error);
+        });
+      }
+    });
 
-    <!-- Slide 3: Extraction of Human Artifacts -->
-    <section class="slide" data-slide="2">
-      <div class="slide-content">
-        <span class="slide-num">02 / Raw Material</span>
-        <h2>Artists' Output as <br><span class="accent-text">Uncompensated Input</span></h2>
-        <p>Generative AI platforms (ChatGPT, Gemini, Sora) rely heavily on vast datasets compiled from human-produced creative works.</p>
-        <ul class="feature-list">
-          <li><strong>No Clear Consent:</strong> Data scraped without explicit artist opting-in.</li>
-          <li><strong>No Direct Compensation:</strong> Zero royalties or financial share for base assets.</li>
-          <li><strong>Zero Transparency:</strong> Opaque data sources shielded behind proprietary black boxes.</li>
-        </ul>
-      </div>
-      <div class="slide-visual">
-        <img src="https://images.unsplash.com/photo-1547891654-e66ed7ebb968?auto=format&fit=crop&w=1000&q=80" alt="Paint palettes and creative artwork" />
-      </div>
-    </section>
+    // Function to close modal and reset video
+    function closeModal() {
+      modalOverlay.classList.remove('active');
+      video.pause();
+      video.currentTime = 0; // Reset video to start
+    }
 
-    <!-- Slide 4: Power Shift -->
-    <section class="slide" data-slide="3">
-      <div class="slide-content">
-        <span class="slide-num">03 / Capital Consolidation</span>
-        <h2>Siphoning Value: <br><span class="accent-text">Creators to Platforms</span></h2>
-        <p>The economic value historically earned by specialized writers, designers, illustrators, and animators is consolidated into proprietary infrastructure.</p>
-        <blockquote class="quote-box">
-          "The platform economy turns creative expression into zero-cost raw material, extracting value from labor to build closed commercial monopolies."
-        </blockquote>
-      </div>
-      <div class="slide-visual">
-        <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1000&q=80" alt="Matrix matrix code computer screen" />
-      </div>
-    </section>
+    closeBtn.addEventListener('click', closeModal);
 
-    <!-- Slide 5: Automation of Traditional Skills -->
-    <section class="slide" data-slide="4">
-      <div class="slide-content">
-        <span class="slide-num">04 / De-skilling</span>
-        <h2>Automation Across <br><span class="accent-text">Creative Disciplines</span></h2>
-        <div class="discipline-tags">
-          <span class="tag">Writing</span>
-          <span class="tag">Graphic Design</span>
-          <span class="tag">Illustration</span>
-          <span class="tag">Music Production</span>
-          <span class="tag">Video Editing</span>
-        </div>
-        <p>Automated workflow agents disparage traditional skills built over decades, compressing turnarounds and devaluing craft expertise under the guise of efficiency.</p>
-      </div>
-    </section>
+    // Close when clicking outside video frame
+    modalOverlay.addEventListener('click', (e) => {
+      if (e.target === modalOverlay) {
+        closeModal();
+      }
+    });
+  </script>
 
-    <!-- Slide 6: The Hidden Global Supply Chain -->
-    <section class="slide" data-slide="5">
-      <div class="slide-content">
-        <span class="slide-num">05 / Invisible Labor</span>
-        <h2>The Global South & <br><span class="accent-text">Hidden AI Sub-Labor</span></h2>
-        <p>AI does not build itself. High-tech platforms rely on precarious, low-wage human labor outsourced across the Global South for:</p>
-        <div class="card-grid">
-          <div class="card">
-            <h3>Data Labeling</h3>
-            <p>Categorizing millions of images for minimal piece-rate pay.</p>
-          </div>
-          <div class="card">
-            <h3>Annotation</h3>
-            <p>Refining prompt outputs for reinforcement learning (RLHF).</p>
-          </div>
-          <div class="card">
-            <h3>Content Moderation</h3>
-            <p>Filtering violent and toxic material to keep models safe for consumer launch.</p>
-          </div>
-        </div>
-      </div>
-      <div class="slide-visual">
-        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1000&q=80" alt="Tech labor computer screen" />
-      </div>
-    </section>
-
-    <!-- Slide 7: Conclusion -->
-    <section class="slide" data-slide="6">
-      <div class="slide-content">
-        <span class="slide-num">06 / Conclusion</span>
-        <h2>Democratic Expansion or <br><span class="accent-text">Reinforced Hierarchy?</span></h2>
-        <p>Generative AI offers democratized creative tools, but simultaneously drives a fundamental restructuring of cultural production.</p>
-        <div class="conclusion-box">
-          <p>Addressing these dynamics requires rethinking ownership, demanding labor transparency, and protecting human agency in the digital economy.</p>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- Navigation Controls -->
-  <footer class="controls">
-    <button id="prevBtn" class="nav-btn" aria-label="Previous Slide">&larr; Prev</button>
-    <span id="slideCounter" class="counter">1 / 7</span>
-    <button id="nextBtn" class="nav-btn" aria-label="Next Slide">Next &rarr;</button>
-  </footer>
-
-  <script src="main.js"></script>
 </body>
 </html>
